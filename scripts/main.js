@@ -94,5 +94,24 @@ setInterval(() => {
     setInterval(() => {
         projectileArr.forEach((projectileInstance) => {
             projectileInstance.moveDown();
+            if (
+                player.positionX < projectileInstance.positionX + projectileInstance.width &&
+                player.positionX + player.width > projectileInstance.positionX &&
+                player.positionY < projectileInstance.positionY + projectileInstance.height &&
+                player.positionY + player.height > projectileInstance.positionY
+            ) {
+                console.log("Got hit!.............");
+                window.location.href = "gameover.html";
+            }
         })
     } , 100)
+
+
+    /* if (
+        rect1.x < rect2.x + rect2.w &&
+        rect1.x + rect1.w > rect2.x &&
+        rect1.y < rect2.y + rect2.h &&
+        rect1.y + rect1.h > rect2.y
+    ) {
+        
+    } */

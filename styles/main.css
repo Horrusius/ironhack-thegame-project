@@ -18,11 +18,13 @@ body{
 }
 
 #board{
+    margin: 0;
+    padding: 0;
     position: relative;
     width: 100vw;
     height: 100vh;
     background-color: var(--main-background-color);
-    z-index: 99;
+    overflow: hidden;
 }
 
 #player{
