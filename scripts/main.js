@@ -38,7 +38,7 @@ class Projectile {
     constructor() {
         this.width = 5;
         this.height = 5;
-        this.positionX = Math.random() * (100 - this.width);
+        this.positionX = Math.floor(Math.random() * (100 - this.width + 1))
         this.positionY = 100;
         this.speed = 5;
 
