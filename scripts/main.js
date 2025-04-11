@@ -1,9 +1,9 @@
 class Player {
     constructor() {
-        this.positionX = 50;
+        this.width = 6;
+        this.height = 6;
+        this.positionX = 50 - this.width/2;
         this.positionY = 0;
-        this.width = 5;
-        this.height = 5;
         this.updateUI();
     };
     updateUI() {
@@ -36,8 +36,8 @@ class Player {
 
 class Projectile {
     constructor() {
-        this.width = 5;
-        this.height = 5;
+        this.width = 6;
+        this.height = 6;
         this.positionX = Math.floor(Math.random() * (100 - this.width + 1))
         this.positionY = 100;
         this.speed = 5;
