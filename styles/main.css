@@ -7,8 +7,9 @@
 }
 
 :root {
-    --mainbackgroundcolor: #3ae;
-    --playercolor: #fe1;
+    --main-background-color: #3ae;
+    --player-color: #fe1;
+    --projectile-color: #e11;
 }
 
 body{
@@ -20,11 +21,20 @@ body{
     position: relative;
     width: 100vw;
     height: 100vh;
-    background-color: var(--mainbackgroundcolor);
+    background-color: var(--main-background-color);
+    z-index: 99;
 }
 
 #player{
     position: absolute;
-    background-color: var(--playercolor);
+    background-color: var(--player-color);
+
+    transition: .1s;
 }
 
+.projectile{
+    position: absolute;
+    background-color: var(--projectile-color);
+
+    transition: .1s;
+}
