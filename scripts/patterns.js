@@ -34,3 +34,4 @@ class Projectile {
         this.updateUI();
     }
 }
+

@@ -15,6 +15,7 @@ class Player {
         this.pressedKeys = {};
 
         this.initControls();
+        this.move();
         this.updateUI();
         this.gameLoop();
     }

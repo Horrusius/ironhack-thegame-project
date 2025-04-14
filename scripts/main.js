@@ -6,7 +6,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const projectileArr = [];
 
-    setInterval(() => {
+    const cubeRain = setInterval(() => {
         newProjectile = new Projectile();
         projectileArr.push(newProjectile);
         console.log("creating a new projectile")
@@ -26,6 +26,9 @@ document.addEventListener("DOMContentLoaded", () => {
         }
 
         console.log(projectileArr)
+        setTimeout(() => {
+            clearInterval(cubeRain);
+          }, 12000);
     }, 300)
 
     
