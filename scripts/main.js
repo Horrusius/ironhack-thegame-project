@@ -1,117 +1,45 @@
-class Player {
-    constructor() {
-        this.width = 6;
-        this.height = 6;
-        this.positionX = 50 - this.width/2;
-        this.positionY = 0;
-        this.updateUI();
-    };
-    updateUI() {
-        const playerElm = document.getElementById("player");
-        playerElm.style.left = this.positionX + "vw";
-        playerElm.style.bottom = this.positionY + "vh";
-        playerElm.style.width = this.width + "vw";
-        playerElm.style.height = this.height + "vw";
-    };
-    moveLeft() {
-        this.positionX--;
-        this.updateUI();
-        if (this.positionX <= 0) {
-            return this.positionX++;
-        };
-        console.log("New position...", this.positionX);
-    };
-    moveRight() {
-        this.positionX++;
-        this.updateUI();
-        if (this.positionX >= (100 - this.width)) {
-            return this.positionX--;
-        };
-        console.log("New position...", this.positionX);
-    };
+document.addEventListener("DOMContentLoaded", () => {
+    const player = new Player("player");
+    const container = document.getElementById("game-area");
+    const gameWidth = container.clientWidth;
+    const gameHeight = container.clientHeight;
 
-};
+    const projectileArr = [];
 
-
-
-class Projectile {
-    constructor() {
-        this.width = 6;
-        this.height = 6;
-        this.positionX = Math.floor(Math.random() * (100 - this.width + 1))
-        this.positionY = 100;
-        this.speed = 5;
-
-
-        this.createDomElement();
-        this.projectileElm;
-
-        this.updateUI();
-    };
-    createDomElement() {
-        this.projectileElm = document.createElement("div");
-        this.projectileElm.className = "projectile";
-        const container = document.getElementById("board");
-        container.appendChild(this.projectileElm);
-    };
-    updateUI() {
-
-        this.projectileElm.style.left = this.positionX + "vw";
-        this.projectileElm.style.bottom = this.positionY + "vh";
-        this.projectileElm.style.width = this.width + "vw";
-        this.projectileElm.style.height = this.height + "vw";
-    };
-    moveDown() {
-        this.positionY--;
-        this.updateUI();
-        console.log("New position...", this.positionY);
-    };
-
-};
-
-
-
-const player = new Player();
-
-document.addEventListener("keydown", (e) => {
-    if (e.code === "ArrowLeft") {
-        player.moveLeft();
-    } else if (e.code === "ArrowRight") {
-        player.moveRight();
-    };
-});
-
-const projectileArr = [];
-
-//generate projectiles
-setInterval(() => {
-    newProjectile = new Projectile();
-    projectileArr.push(newProjectile);
-    console.log("creating a new projectile")
-}, 3000)
-
-//move projectiles
     setInterval(() => {
-        projectileArr.forEach((projectileInstance) => {
-            projectileInstance.moveDown();
-            if (
-                player.positionX < projectileInstance.positionX + projectileInstance.width &&
-                player.positionX + player.width > projectileInstance.positionX &&
-                player.positionY < projectileInstance.positionY + projectileInstance.height &&
-                player.positionY + player.height > projectileInstance.positionY
-            ) {
-                console.log("Got hit!.............");
-                window.location.href = "gameover.html";
-            }
-        })
-    } , 100)
+        newProjectile = new Projectile();
+        projectileArr.push(newProjectile);
+        console.log("creating a new projectile")
 
-
-    /* if (
-        rect1.x < rect2.x + rect2.w &&
-        rect1.x + rect1.w > rect2.x &&
-        rect1.y < rect2.y + rect2.h &&
-        rect1.y + rect1.h > rect2.y
-    ) {
+        for (let i = projectileArr.length - 1; i >= 0; i--) {
+            const projectile = projectileArr[i];
         
-    } */
+            const left = parseInt(projectile.projectileElm.style.left, 10);
+            const bottom = parseInt(projectile.projectileElm.style.bottom, 10);
+        
+            if (left < 0 || bottom < 0 || left > gameWidth || bottom > gameHeight) {
+    
+                projectile.projectileElm.remove();
+                
+                projectileArr.splice(i, 1);
+            }
+        }
+
+        console.log(projectileArr)
+    }, 300)
+
+    
+
+    const collisionManager = new CollisionManager(player, projectileArr, () => {
+        console.log("Got hit!");
+        window.location.href = "gameover.html";
+    });
+
+    setInterval(() => {
+        projectileArr.forEach(p => p.moveDown());
+        collisionManager.checkCollisions();
+    }, 1);
+
+
+    //End of DOM Content Loaded
+});

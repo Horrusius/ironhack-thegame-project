@@ -7,7 +7,8 @@
 }
 
 :root {
-    --main-background-color: #3ae;
+    --main-background-color: rgb(12, 81, 121);
+    --game-field: #3b6;
     --player-color: #fe1;
     --projectile-color: #e11;
 }
@@ -15,28 +16,30 @@
 body{
     margin: 0;
     padding: 0;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--main-background-color);
 }
 
-#board{
+#game-area{
     margin: 0;
     padding: 0;
     position: relative;
-    width: 100vw;
-    height: 100vh;
-    background-color: var(--main-background-color);
+    width: 960px;
+    height: 540px;
+    background-color: var(--game-field);
     overflow: hidden;
 }
 
 #player{
     position: absolute;
     background-color: var(--player-color);
-
-    transition: .1s;
 }
 
 .projectile{
     position: absolute;
     background-color: var(--projectile-color);
-
-    transition: .1s;
 }
