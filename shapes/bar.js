@@ -1,11 +1,13 @@
 class Bar {
-    constructor(positionX, positionY, width, height){
+    constructor(positionX, positionY, width, height, speed, deployTime){
         const container = document.getElementById("game-area");
         this.gameWidth = container.clientWidth;
         this.gameHeight = container.clientHeight;
 
         this.width = width;
         this.height = height;
+        this.speed = speed;
+        this.deployTime = deployTime;
         this.activeState = false;
 
         this.positionX = positionX;
