@@ -1,14 +1,15 @@
 class Bar {
-    constructor(){
-        this.width = 6;
-        this.height = 6;
-        
+    constructor(positionX, positionY, width, height){
         const container = document.getElementById("game-area");
         this.gameWidth = container.clientWidth;
         this.gameHeight = container.clientHeight;
 
-        this.positionX = Math.floor(Math.random() * (this.gameWidth - this.width));
-        this.positionY = this.gameHeight;
+        this.width = width;
+        this.height = height;
+        this.activeState = false;
+
+        this.positionX = positionX;
+        this.positionY = positionY;
 
         this.createDomElement(container);
         this.updateUI();
@@ -31,4 +32,43 @@ class Bar {
         this.positionY -= this.speed;
         this.updateUI();
     }
+    moveUp() {
+        this.positionY += this.speed;
+        this.updateUI();
+    }
+    moveLeft() {
+        this.positionX -= this.speed;
+        this.updateUI();
+    }
+    moveRight() {
+        this.positionX += this.speed;
+        this.updateUI();
+    }
+}
+
+const barArr = [];
+
+function bar(positionX, positionY, width, height){
+    const newBar = new Bar(positionX, positionY, width, height);
+    barArr.push(newBar);
+
+    const collisionManager = new CollisionManager(player, barArr, () => {
+        player.lives--;
+        player.updateLivesUI();
+
+        if (player.lives <= 0) {
+            clearInterval(cubeRain);
+            for (let i = barArr.length - 1; i >= 0; i--) {
+                barArr.pop();
+            }
+        }
+    });
+
+    function collisionChecker() {
+        collisionManager.checkCollisions();
+    
+        requestAnimationFrame(collisionChecker);
+    }
+    
+    requestAnimationFrame(collisionChecker);
 }

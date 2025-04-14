@@ -37,9 +37,6 @@ class CubeRain {
 }
 
 const projectileArr = [];
-setInterval(() => {
-    console.log(projectileArr)
-}, 3000)
 
 function cubeRain(width, height, speed, activeTime, spawnRate) {
     let spawningActive = true;
@@ -87,13 +84,15 @@ function cubeRain(width, height, speed, activeTime, spawnRate) {
             for (let i = projectileArr.length - 1; i >= 0; i--) {
                 projectileArr.pop();
             }
-        } else {
-            console.log("Hit! Lives left:", player.lives);
         }
     });
 
-    setInterval(() => {
+    function collisionChecker() {
         projectileArr.forEach(p => p.moveDown());
         collisionManager.checkCollisions();
-    }, 1);
+    
+        requestAnimationFrame(collisionChecker);
+    }
+    
+    requestAnimationFrame(collisionChecker);
 }
