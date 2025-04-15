@@ -1,6 +1,6 @@
 const container = document.getElementById("game-area");
-this.gameWidth = container.clientWidth;
-this.gameHeight = container.clientHeight;
+gameWidth = container.clientWidth;
+gameHeight = container.clientHeight;
 
 const player = new Player("player", 3);
 
@@ -9,5 +9,6 @@ const player = new Player("player", 3);
 }, 2000); */
 
 setTimeout(function () {
-    bar(0, this.gameHeight/2, this.gameWidth, 50, 800, 2000)
-}, 10);
+    bar(0, gameHeight/2, gameWidth, 20, 800, 3)
+    bar(gameWidth/3, gameHeight/2, 20, gameHeight, 800, 3)
+}, 1000);

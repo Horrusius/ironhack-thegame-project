@@ -8,9 +8,10 @@
 
 :root {
     --main-background-color: rgb(12, 81, 121);
-    --game-field: #3b6;
+    --game-field: rgb(12, 28, 36);
     --player-color: rgb(77, 117, 228);
     --projectile-color: #e11;
+    --bar-color: rgb(235, 89, 89, 0.3);
     --game-over-text: #fff;
     --game-over-border: rgb(29, 29, 29);
 }
@@ -123,6 +124,17 @@
 
 .bar {
     position: absolute;
-    background-color: var(--projectile-color);
+    background-color: var(--bar-color);
+    transition: width 1s ease, height 1s ease, left 1s ease, bottom 1s ease;
     z-index: 1;
+}
+
+.active {
+    position: absolute;
+    background-color: rgb(255, 0, 106);
+    transition: width 1s ease, height 1s ease, left 1s ease, bottom 1s ease;
+  }
+
+.pulse1 {
+    background-color: rgb(255, 255, 255);
 }
