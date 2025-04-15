@@ -1,8 +1,8 @@
 class Player {
     constructor(elementId, lives) {
         this.element = document.getElementById(elementId);
-        this.width = 30;
-        this.height = 30;
+        this.width = 1;
+        this.height = 1;
         this.speed = 4;
         this.lives = lives;
         this.isInvincible = false;
@@ -17,8 +17,10 @@ class Player {
         this.gameWidth = container.clientWidth;
         this.gameHeight = container.clientHeight;
 
-        this.positionX = container.clientWidth / 2 - this.width / 2;
-        this.positionY = 0;
+        /* this.positionX = container.clientWidth / 2 - this.width / 2;
+        this.positionY = 0; */
+        this.positionX = 295;
+        this.positionY = 295;
 
         this.pressedKeys = {};
 

@@ -10,7 +10,7 @@ class Circle {
         this.activeState = false;
 
         this.positionX = positionX;
-        this.positionY = positionY;
+        this.positionY = positionY; 
 
         this.shouldCreateShockwave = createShockwave;
         this.shouldShootBullets = shootBullets;
@@ -29,6 +29,8 @@ class Circle {
 
     createDomElement(container) {
         this.circleElm.className = "circle";
+        this.circleElm.setAttribute("data-radius", this.diameter/2);
+        this.circleElm.setAttribute("data-type", "circle")
         container.appendChild(this.circleElm);
     }
 
@@ -151,17 +153,18 @@ function circle(positionX, positionY, diameter, deployTime, createShockwave, sho
                 const activeCircles = circleArr.filter(circle => circle.activeState);
                 collisionManager.elements = activeCircles;
 
-                collisionManager.checkCollisions(); // Check collisions for circles
+                collisionManager.checkCollisions();
                 requestAnimationFrame(collisionChecker);
             }
 
             requestAnimationFrame(collisionChecker);
         });
     }, 100);
+    
 }
 
 
-function checkBulletCollisions() {
+/* function checkBulletCollisions() {
     const collisionManager = new CollisionManager(player, bulletArr, () => {
         player.takeDamage();
         if (player.lives <= 0) {
@@ -176,3 +179,4 @@ function checkBulletCollisions() {
     collisionManager.checkCollisions();
     requestAnimationFrame(checkBulletCollisions);
 }
+ */

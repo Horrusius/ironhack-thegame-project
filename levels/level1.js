@@ -14,6 +14,6 @@ setTimeout(function () {
 }, 1000); */
 
 
-/* setTimeout(function () {
-    circle(270, 270, 50, 20, 3, true, true)
-}, 1000); */
+setTimeout(function () {
+    circle(270, 270, 50, 0, 3, true, true)
+}, 1000);
