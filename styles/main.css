@@ -129,6 +129,45 @@
     z-index: 1;
 }
 
+.circle {
+    position: absolute;
+    background-color: var(--bar-color);
+    border-radius: 50%;
+    transition: width 1s ease, height 1s ease, left 1s ease, bottom 1s ease;
+}
+
+.shockwave {
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    margin-left: -5px;
+    margin-bottom: -5px;
+    border: 2px solid white;
+    border-radius: 50%;
+    opacity: 0.8;
+    pointer-events: none;
+    animation: shockwave-anim 0.6s ease-out forwards;
+}
+
+@keyframes shockwave-anim {
+    to {
+        width: 300px;
+        height: 300px;
+        margin-left: -150px;
+        margin-bottom: -150px;
+        opacity: 0;
+    }
+}
+
+.bullet {
+    position: absolute;
+    width: 30px;
+    height: 30px;
+    background-color: rgb(255, 0, 106);
+    border-radius: 50%;
+    pointer-events: none;
+}
+
 .active {
     position: absolute;
     background-color: rgb(255, 0, 106);

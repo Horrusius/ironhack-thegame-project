@@ -49,21 +49,21 @@ class Bar {
         setTimeout(() => {
             this.activeState = true;
             this.barElm.classList.add("active");
-    
+
             this.barElm.classList.add("pulse1");
-    
+
             setTimeout(() => {
                 this.barElm.classList.remove("pulse1");
-                    
+
                 if (callback) callback();
             }, 80);
             setTimeout(() => {
                 this.barElm.remove();
                 const index = barArr.indexOf(this);
                 if (index !== -1) barArr.splice(index, 1);
-    
+
             }, 300);
-    
+
         }, 900);
     }
 }
@@ -76,8 +76,9 @@ function bar(positionX, positionY, width, height, deployTime) {
 
     setTimeout(() => {
         newBar.growAndActivate(() => {
+            // CollisionManager for bars
             const collisionManager = new CollisionManager(player, barArr, () => {
-                player.lives--;
+                player.takeDamage();
                 player.updateLivesUI();
 
                 if (player.lives <= 0) {
@@ -85,12 +86,13 @@ function bar(positionX, positionY, width, height, deployTime) {
                     for (let i = barArr.length - 1; i >= 0; i--) {
                         barArr.pop();
                     }
+                    window.location.href = "gameover.html";
                 }
             });
 
             function collisionChecker() {
                 const activeBars = barArr.filter(bar => bar.activeState);
-                collisionManager.bars = activeBars;
+                collisionManager.elements = activeBars;
 
                 collisionManager.checkCollisions();
                 requestAnimationFrame(collisionChecker);
@@ -98,5 +100,5 @@ function bar(positionX, positionY, width, height, deployTime) {
 
             requestAnimationFrame(collisionChecker);
         });
-    }, 100);
+    }, 100)
 }

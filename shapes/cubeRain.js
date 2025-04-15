@@ -35,12 +35,11 @@ class CubeRain {
         this.updateUI();
     }
 }
-
 const projectileArr = [];
 
 function cubeRain(width, height, speed, activeTime, spawnRate) {
     let spawningActive = true;
-
+  
     const spawnInterval = setInterval(() => {
         const newProjectile = new CubeRain(width, height, speed);
         projectileArr.push(newProjectile);
@@ -59,12 +58,7 @@ function cubeRain(width, height, speed, activeTime, spawnRate) {
             const left = parseInt(projectile.cubeRainElm.style.left, 10);
             const bottom = parseInt(projectile.cubeRainElm.style.bottom, 10);
 
-            if (
-                left < 0 ||
-                bottom < 0 ||
-                left > this.gameWidth ||
-                bottom > this.gameHeight
-            ) {
+            if (left < 0 || bottom < 0 || left > this.gameWidth || bottom > this.gameHeight) {
                 projectile.cubeRainElm.remove();
                 projectileArr.splice(i, 1);
             }
@@ -76,7 +70,7 @@ function cubeRain(width, height, speed, activeTime, spawnRate) {
     }, 20);
 
     const collisionManager = new CollisionManager(player, projectileArr, () => {
-        player.lives--;
+        player.takeDamage();
         player.updateLivesUI();
 
         if (player.lives <= 0) {
@@ -84,9 +78,9 @@ function cubeRain(width, height, speed, activeTime, spawnRate) {
             for (let i = projectileArr.length - 1; i >= 0; i--) {
                 projectileArr.pop();
             }
+            window.location.href = "gameover.html";
         }
     });
-
     function collisionChecker() {
         projectileArr.forEach(p => p.moveDown());
         collisionManager.checkCollisions();
