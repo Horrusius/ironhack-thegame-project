@@ -8,7 +8,6 @@ class Bar {
         this.height = height;
         this.speed = speed;
         this.deployTime = deployTime;
-        this.activeState = false;
 
         this.positionX = positionX;
         this.positionY = positionY;
@@ -51,6 +50,8 @@ class Bar {
 const barArr = [];
 
 function bar(positionX, positionY, width, height){
+    let activeState = false;
+    
     const newBar = new Bar(positionX, positionY, width, height);
     barArr.push(newBar);
 
