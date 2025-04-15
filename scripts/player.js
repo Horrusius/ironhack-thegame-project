@@ -3,14 +3,14 @@ class Player {
         this.element = document.getElementById(elementId);
         this.width = 30;
         this.height = 30;
-        this.speed = 3;
+        this.speed = 4;
         this.lives = lives;
         this.isInvincible = false;
         this.invincibilityDuration = 1000;
         this.isRolling = false;
         this.canRoll = true;
         this.rollDuration = 300;
-        this.rollCooldown = 800;
+        this.rollCooldown = 400;
         this.rollSpeed = 8;
 
         const container = document.getElementById("game-area");
