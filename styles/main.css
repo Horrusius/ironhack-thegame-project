@@ -84,7 +84,24 @@
 
 .cubeRain {
     position: absolute;
-    background-color: var(--projectile-color);
+    background-color: rgb(255, 255, 255);
+    border-radius: 50%;  /* Start as a circle */
+    animation: changeShape .5 2.5s  forwards;  /* Apply animation on load */
+  }
+
+  /* Define the keyframes for the transition */
+  @keyframes changeShape {
+    0% {
+        background-color: rgb(255, 255, 255);
+        border-radius: 50%;  /* Start as a circle */
+        transform: scale(1);  /* Optionally add a scaling effect */
+    }
+    50% {
+        background-color: rgb(255, 0, 106);
+        border-radius: 0%;  /* End as a square */
+      t ransform: scale(1);  /* Keep the scale as is */
+    }
+  }
 }
 
 #game-over {
@@ -167,6 +184,10 @@
     background-color: rgb(255, 0, 106);
     border-radius: 50%;
     pointer-events: none;
+}
+
+.bullet.spawn {
+    background-color: rgb(255, 255, 255);
 }
 
 .active {

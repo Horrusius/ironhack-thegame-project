@@ -17,10 +17,8 @@ class Player {
         this.gameWidth = container.clientWidth;
         this.gameHeight = container.clientHeight;
 
-        /* this.positionX = container.clientWidth / 2 - this.width / 2;
-        this.positionY = 0; */
-        this.positionX = 295;
-        this.positionY = 295;
+        this.positionX = container.clientWidth / 2 - this.width / 2;
+        this.positionY = 0;
 
         this.pressedKeys = {};
 

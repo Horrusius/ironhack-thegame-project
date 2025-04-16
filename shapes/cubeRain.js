@@ -27,6 +27,7 @@ class CubeRain {
     createDomElement(container) {
         this.cubeRainElm = document.createElement("div");
         this.cubeRainElm.className = "cubeRain";
+        
         container.appendChild(this.cubeRainElm);
     }
 

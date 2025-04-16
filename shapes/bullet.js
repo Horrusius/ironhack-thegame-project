@@ -15,7 +15,11 @@ class Bullet {
         this.dy = Math.sin(this.angle) * this.speed;
 
         this.bulletElm = document.createElement("div");
-        this.bulletElm.className = "bullet";
+        this.bulletElm.className = "bullet spawn";
+
+        setTimeout(() => {
+            this.bulletElm.classList.remove("spawn");
+        }, 100);
 
         this.bulletElm.style.position = "absolute";
         this.bulletElm.style.width = this.width + "px";

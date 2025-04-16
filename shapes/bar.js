@@ -1,5 +1,5 @@
 class Bar {
-    constructor(positionX, positionY, width, height, speed, deployTime) {
+    constructor(positionX, positionY, width, height, speed, growTime = 900, activeTime = 300, pulseTime = 80) {
         const container = document.getElementById("game-area");
         this.gameWidth = container.clientWidth;
         this.gameHeight = container.clientHeight;
@@ -7,7 +7,9 @@ class Bar {
         this.width = width;
         this.height = height;
         this.speed = speed;
-        this.deployTime = deployTime;
+        this.growTime = growTime;
+        this.activeTime = activeTime;
+        this.pulseTime = pulseTime;
         this.activeState = false;
 
         this.positionX = positionX;
@@ -56,22 +58,22 @@ class Bar {
                 this.barElm.classList.remove("pulse1");
 
                 if (callback) callback();
-            }, 80);
+            }, this.pulse);
             setTimeout(() => {
                 this.barElm.remove();
                 const index = barArr.indexOf(this);
                 if (index !== -1) barArr.splice(index, 1);
 
-            }, 300);
+            }, this.activeTime);
 
-        }, 900);
+        }, this.growTime);
     }
 }
 
 const barArr = [];
 
-function bar(positionX, positionY, width, height, deployTime) {
-    const newBar = new Bar(positionX, positionY, width, height, 0, deployTime);
+function bar(positionX, positionY, width, height, growTime, activeTime, pulseTime) {
+    const newBar = new Bar(positionX, positionY, width, height, 0, growTime, activeTime, pulseTime);
     barArr.push(newBar);
 
     setTimeout(() => {
