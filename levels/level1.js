@@ -14,9 +14,9 @@ setTimeout(function () {
 }, 10000); */
 
 
-setTimeout(function () {
+/* setTimeout(function () {
     circle(480, 270, 50, 0, 3, false, true, 6, 30, 2, 900)
-}, 1000); /*
+}, 1000);
 setTimeout(function () {
     circle(290, 370, 50, 0, 3, false, false)
 }, 2000);
@@ -24,8 +24,26 @@ setTimeout(function () {
     circle(290, 320, 50, 0, 3, false, false)
 }, 2500); */
 
-setTimeout(function () {
+/* setTimeout(function () {
     Bullet.shootBulletRing(200, 300, 4, 30, 2, 900);
     startBulletCollisionChecker();
-}, 2000);
+}, 2000); */
 
+/* setTimeout(function () {
+    Bullet.spinningSpiral(480, 270, 100, 30, 1, 100, 500);
+    startBulletCollisionChecker();
+}, 2000); */
+
+/* setTimeout(function () {
+    Bullet.explodingBurst(480, 270, 30, 5, 10, 300);
+    startBulletCollisionChecker();
+}, 2000); */
+
+/* setTimeout(function () {
+    Bullet.wavePattern(480, 270, 30, 5, 5, 30);
+    startBulletCollisionChecker();
+}, 2000); */
+/* setTimeout(function () {
+    Bullet.alternatingSpiral(480, 270, 30, 5, 160, 50);
+    startBulletCollisionChecker();
+}, 2000); */

@@ -20,8 +20,8 @@ class Bullet {
         this.bulletElm.style.position = "absolute";
         this.bulletElm.style.width = this.width + "px";
         this.bulletElm.style.height = this.height + "px";
-        this.bulletElm.style.left = this.x + "px";
-        this.bulletElm.style.bottom = this.y + "px";
+        this.bulletElm.style.left = this.positionX + "px";
+        this.bulletElm.style.bottom = this.positionY + "px";
 
         document.getElementById("game-area").appendChild(this.bulletElm);
 
@@ -56,6 +56,67 @@ class Bullet {
             const newBullet = new Bullet(bulletX, bulletY, bulletSize, bulletSize, angle, speed, maxSteps);
             bulletArr.push(newBullet);
         }
+    }
+
+    static spinningSpiral(centerX, centerY, bulletCount = 100, bulletSize = 10, bulletSpeed = 2, interval = 100, maxSteps = 300) {
+        let angle = 0;
+        let count = 0;
+    
+        function shoot() {
+            if (count++ >= bulletCount) return;
+    
+            const bulletX = centerX - bulletSize / 2;
+            const bulletY = centerY - bulletSize / 2;
+            const newBullet = new Bullet(bulletX, bulletY, bulletSize, bulletSize, angle, bulletSpeed, maxSteps);
+            bulletArr.push(newBullet);
+    
+            angle += 0.2;
+            setTimeout(shoot, interval);
+        }
+    
+        shoot();
+    }
+
+    static explodingBurst(centerX, centerY, bulletSize = 10, bulletSpeed = 5, bulletCount = 24, maxSteps) {
+        for (let i = 0; i < bulletCount; i++) {
+            const angle = (2 * Math.PI / bulletCount) * i;
+            const bulletX = centerX - bulletSize / 2;
+            const bulletY = centerY - bulletSize / 2;
+            const newBullet = new Bullet(bulletX, bulletY, bulletSize, bulletSize, angle, bulletSpeed, maxSteps);
+            bulletArr.push(newBullet);
+        }
+    }
+
+    static wavePattern(startX, startY, bulletSize = 10, bulletSpeed = 5, rows = 5, spacing = 30) {
+        for (let i = 0; i < rows; i++) {
+            const angle = Math.PI / 2; // Straight up
+            const bulletX = startX + i * spacing;
+            const bulletY = startY;
+            const newBullet = new Bullet(bulletX, bulletY, bulletSize, bulletSize, angle, bulletSpeed);
+            bulletArr.push(newBullet);
+        }
+    }
+
+    static alternatingSpiral(centerX, centerY, bulletSize = 10, bulletSpeed = 5, totalSteps = 60, interval = 100) {
+        let step = 0;
+
+        function shoot() {
+            if (step++ >= totalSteps) return;
+
+            const angle1 = step * 0.2;
+            const angle2 = -step * 0.2;
+            const bulletX = centerX - bulletSize / 2;
+            const bulletY = centerY - bulletSize / 2;
+
+            const bullet1 = new Bullet(bulletX, bulletY, bulletSize, bulletSize, angle1, bulletSpeed);
+            const bullet2 = new Bullet(bulletX, bulletY, bulletSize, bulletSize, angle2, bulletSpeed);
+
+            bulletArr.push(bullet1, bullet2);
+
+            setTimeout(shoot, interval);
+        }
+
+        shoot();
     }
 }
 
