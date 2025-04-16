@@ -46,7 +46,7 @@ setTimeout(function () {
 setTimeout(function () {
     Bullet.spinningSpiral(140, 270, 100, 30, 1, 100, 900);
     startBulletCollisionChecker();
-}, 1000);
+}, 17000);
 
 /* setTimeout(function () {
     Bullet.shootBulletRing(200, 300, 20, 30, 2, 900);
