@@ -15,5 +15,17 @@ setTimeout(function () {
 
 
 setTimeout(function () {
-    circle(480, 270, 50, 0, 3, false, false)
-}, 1000);
+    circle(480, 270, 50, 0, 3, false, true, 6, 30, 2, 900)
+}, 1000); /*
+setTimeout(function () {
+    circle(290, 370, 50, 0, 3, false, false)
+}, 2000);
+setTimeout(function () {
+    circle(290, 320, 50, 0, 3, false, false)
+}, 2500); */
+
+setTimeout(function () {
+    Bullet.shootBulletRing(200, 300, 4, 30, 2, 900);
+    startBulletCollisionChecker();
+}, 2000);
+

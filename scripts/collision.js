@@ -15,7 +15,7 @@ class CollisionManager {
 
   isColliding(a, b) {
 
-    if (b.type === "circle") {
+    if (b.type === "circle" || b.type === "bullet") {
       return this.isCircleCollidingWithPlayer(a, b);
     }
 
