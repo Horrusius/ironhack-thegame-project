@@ -1,5 +1,5 @@
 class Circle {
-    constructor(positionX, positionY, diameter, speed, deployTime, createShockwave, shootBullets) {
+    constructor(positionX, positionY, diameter, speed, deployTime, createShockwave, shootBullets, bulletAmmount, bulletSize, bulletSpeed, maxSteps) {
         const container = document.getElementById("game-area");
 
         this.type = "circle"
@@ -17,6 +17,10 @@ class Circle {
 
         this.shouldCreateShockwave = createShockwave;
         this.shouldShootBullets = shootBullets;
+        this.bulletAmmount = bulletAmmount;
+        this.bulletSize = bulletSize;
+        this.bulletSpeed = bulletSpeed;
+        this.maxSteps = maxSteps;
 
         this.circleElm = document.createElement("div");
         this.createDomElement(container);
@@ -55,14 +59,17 @@ class Circle {
             if (this.shouldCreateShockwave) {
                 this.createShockwave();
             }
-            if (this.shouldShootBullets) {
-                this.shootBulletRing();
-            }
+            
             this.circleElm.classList.add("active");
 
             this.circleElm.classList.add("pulse1");
+            console.log(this.bulletAmmount);
 
             setTimeout(() => {
+                if (this.shouldShootBullets) {
+                    Bullet.shootBulletRing(centerX, centerY, this.bulletAmmount, this.bulletSize, this.bulletSpeed, this.maxSteps);
+                    startBulletCollisionChecker();
+                }
                 this.circleElm.classList.remove("pulse1");
                 if (callback) callback();
             }, 80);
@@ -90,50 +97,12 @@ class Circle {
             shockwave.remove();
         }, 600);
     }
-
-    shootBulletRing() {
-        const container = document.getElementById("game-area");
-        const bulletCount = 12;
-        const radius = this.diameter / 2;
-        const centerX = this.positionX + radius;
-        const centerY = this.positionY + radius;
-
-        for (let i = 0; i < bulletCount; i++) {
-            const angle = (2 * Math.PI / bulletCount) * i;
-            const bullet = document.createElement("div");
-            bullet.className = "bullet";
-            container.appendChild(bullet);
-
-            bullet.style.left = centerX + "px";
-            bullet.style.bottom = centerY + "px";
-
-            const speed = 5;
-            const dx = Math.cos(angle) * speed;
-            const dy = Math.sin(angle) * speed;
-
-            let steps = 0;
-            function moveBullet() {
-                if (steps++ > 100) return bullet.remove();
-
-                const currentLeft = parseFloat(bullet.style.left);
-                const currentBottom = parseFloat(bullet.style.bottom);
-
-                bullet.style.left = currentLeft + dx + "px";
-                bullet.style.bottom = currentBottom + dy + "px";
-
-                requestAnimationFrame(moveBullet);
-            }
-
-            moveBullet();
-        }
-    }
 }
 
 const circleArr = [];
-const bulletArr = [];
 
-function circle(positionX, positionY, diameter, speed, deployTime, createShockwave, shootBullets) {
-    const newCircle = new Circle(positionX, positionY, diameter, speed, deployTime, createShockwave, shootBullets);
+function circle(positionX, positionY, diameter, speed, deployTime, createShockwave, shootBullets, bulletAmmount, bulletSize, bulletSpeed, maxSteps) {
+    const newCircle = new Circle(positionX, positionY, diameter, speed, deployTime, createShockwave, shootBullets, bulletAmmount, bulletSize, bulletSpeed, maxSteps);
     circleArr.push(newCircle);
 
     setTimeout(() => {
@@ -164,21 +133,3 @@ function circle(positionX, positionY, diameter, speed, deployTime, createShockwa
     }, 100);
 
 }
-
-
-/* function checkBulletCollisions() {
-    const collisionManager = new CollisionManager(player, bulletArr, () => {
-        player.takeDamage();
-        if (player.lives <= 0) {
-            clearInterval(cubeRain);
-            for (let i = bulletArr.length - 1; i >= 0; i--) {
-                bulletArr.pop();
-            }
-            window.location.href = "gameover.html";
-        }
-    });
-
-    collisionManager.checkCollisions();
-    requestAnimationFrame(checkBulletCollisions);
-}
- */
