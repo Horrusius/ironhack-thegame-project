@@ -63,7 +63,7 @@ setTimeout(function () {
     Bullet.wavePattern(480, 270, 30, 5, 5, 30);
     startBulletCollisionChecker();
 }, 2000); */
-/* setTimeout(function () {
+setTimeout(function () {
     Bullet.alternatingSpiral(480, 270, 30, 5, 160, 50);
     startBulletCollisionChecker();
-}, 2000); */
+}, 19000);
