@@ -11,9 +11,9 @@ const player = new Player("player", 3);
 setTimeout(function () {
     bar(0, gameHeight/2, gameWidth, 20, 800, 3)
     bar(gameWidth/3, gameHeight, 20, gameHeight, 800, 3)
-}, 1000); */
+}, 10000); */
 
 
 setTimeout(function () {
-    circle(270, 270, 50, 0, 3, true, true)
+    circle(480, 270, 50, 0, 3, false, false)
 }, 1000);

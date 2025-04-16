@@ -14,10 +14,10 @@ class CollisionManager {
   }
 
   isColliding(a, b) {
+
     if (b.type === "circle") {
-      return this.isCircleCollidingWithRect(a, b);
+      return this.isCircleCollidingWithPlayer(a, b);
     }
-    console.log(b)
 
     if (
       !a.isInvincible &&
@@ -33,19 +33,35 @@ class CollisionManager {
     return false;
   }
 
-  isCircleCollidingWithCircle(player, circle) {
-    const distX = player.positionX - circle.positionX;
-    const distY = player.positionY - circle.positionY;
-    const distance = Math.sqrt(distX * distX + distY * distY);
-    
-    const combinedRadii = player.radius + circle.radius;
-    
-    if (distance < combinedRadii) {
+  isCircleCollidingWithPlayer(player, circle) {
+    const closestX = Math.max(player.positionX, Math.min(circle.positionX + circle.radius, player.positionX + player.width));
+    const closestY = Math.max(player.positionY, Math.min(circle.positionY + circle.radius, player.positionY + player.height));
+  
+    const dx = circle.positionX + circle.radius - closestX;
+    const dy = circle.positionY + circle.radius - closestY;
+  
+    if ((dx * dx + dy * dy) < (circle.radius * circle.radius)) {
       this.applyCollisionEffects();
       return true;
     }
+  
     return false;
   }
+
+  // isCircleCollidingWithCircle(player, circle) {
+  //   const distX = player.positionX - circle.positionX;
+  //   const distY = player.positionY - circle.positionY;
+  //   const distance = Math.sqrt(distX * distX + distY * distY);
+
+  //   const combinedRadii = player.radius + circle.radius; // ??
+
+
+  //   if (distance < combinedRadii) {
+  //     this.applyCollisionEffects();
+  //     return true;
+  //   }
+  //   return false;
+  // }
 
   applyCollisionEffects() {
     if (!this.player.isInvincible) {

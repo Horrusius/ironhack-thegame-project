@@ -1,8 +1,8 @@
 class Player {
     constructor(elementId, lives) {
         this.element = document.getElementById(elementId);
-        this.width = 1;
-        this.height = 1;
+        this.width = 30;
+        this.height = 30;
         this.speed = 4;
         this.lives = lives;
         this.isInvincible = false;

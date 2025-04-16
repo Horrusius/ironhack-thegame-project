@@ -1,6 +1,9 @@
 class Circle {
     constructor(positionX, positionY, diameter, speed, deployTime, createShockwave, shootBullets) {
         const container = document.getElementById("game-area");
+
+        this.type = "circle"
+        this.radius = diameter / 2
         this.gameWidth = container.clientWidth;
         this.gameHeight = container.clientHeight;
 
@@ -10,7 +13,7 @@ class Circle {
         this.activeState = false;
 
         this.positionX = positionX;
-        this.positionY = positionY; 
+        this.positionY = positionY;
 
         this.shouldCreateShockwave = createShockwave;
         this.shouldShootBullets = shootBullets;
@@ -28,9 +31,7 @@ class Circle {
     }
 
     createDomElement(container) {
-        this.circleElm.className = "circle";
-        this.circleElm.setAttribute("data-radius", this.diameter/2);
-        this.circleElm.setAttribute("data-type", "circle")
+        this.circleElm.className = this.type
         container.appendChild(this.circleElm);
     }
 
@@ -38,11 +39,14 @@ class Circle {
         if (this.activeState) return;
 
         const newDiameter = this.diameter * 3;
-        const delta = (newDiameter - this.diameter) / 2;
+        const centerX = this.positionX + this.diameter / 2;
+        const centerY = this.positionY + this.diameter / 2;
 
         this.diameter = newDiameter;
-        this.positionX -= delta;
-        this.positionY -= delta;
+        this.radius = newDiameter / 2;
+
+        this.positionX = centerX - this.radius;
+        this.positionY = centerY - this.radius;
 
         this.updateUI();
 
@@ -100,11 +104,9 @@ class Circle {
             bullet.className = "bullet";
             container.appendChild(bullet);
 
-            // Starting position
             bullet.style.left = centerX + "px";
             bullet.style.bottom = centerY + "px";
 
-            // Travel
             const speed = 5;
             const dx = Math.cos(angle) * speed;
             const dy = Math.sin(angle) * speed;
@@ -130,8 +132,8 @@ class Circle {
 const circleArr = [];
 const bulletArr = [];
 
-function circle(positionX, positionY, diameter, deployTime, createShockwave, shootBullets) {
-    const newCircle = new Circle(positionX, positionY, diameter, 0, deployTime, createShockwave, shootBullets);
+function circle(positionX, positionY, diameter, speed, deployTime, createShockwave, shootBullets) {
+    const newCircle = new Circle(positionX, positionY, diameter, speed, deployTime, createShockwave, shootBullets);
     circleArr.push(newCircle);
 
     setTimeout(() => {
@@ -160,7 +162,7 @@ function circle(positionX, positionY, diameter, deployTime, createShockwave, sho
             requestAnimationFrame(collisionChecker);
         });
     }, 100);
-    
+
 }
 
 
