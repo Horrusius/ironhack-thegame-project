@@ -1,10 +1,11 @@
 class Bullet {
-    constructor(x, y, width, height, angle, speed = 5, maxSteps = 100) {
+    constructor(positionX, positionY, width, height, angle, speed = 5, maxSteps = 100) {
         this.type = "bullet";
-        this.x = x;
-        this.y = y;
+        this.positionX = positionX;
+        this.positionY = positionY;
         this.width = width;
         this.height = height;
+        this.radius = height / 2;
         this.angle = angle;
         this.speed = speed;
         this.maxSteps = maxSteps;
@@ -29,8 +30,8 @@ class Bullet {
     }
 
     updateUI() {
-        this.bulletElm.style.left = this.x + "px";
-        this.bulletElm.style.bottom = this.y + "px";
+        this.bulletElm.style.left = this.positionX + "px";
+        this.bulletElm.style.bottom = this.positionY + "px";
     }
 
     move() {
@@ -39,8 +40,8 @@ class Bullet {
             return;
         }
 
-        this.x += this.dx;
-        this.y += this.dy;
+        this.positionX += this.dx;
+        this.positionY += this.dy;
 
         this.updateUI();
 
@@ -60,12 +61,11 @@ class Bullet {
 
 const bulletArr = [];
 
-function bullet(x, y, width, height, angle, speed = 5, maxSteps = 100) {
-    const newBullet = new Bullet(x, y, width, height, angle, speed, maxSteps);
+function bullet(positionX, positionY, width, height, angle, speed = 5, maxSteps = 100) {
+    const newBullet = new Bullet(positionX, positionY, width, height, angle, speed, maxSteps);
     bulletArr.push(newBullet);
 }
 
-// Optional: add this inside wherever you're checking bullet collisions
 function startBulletCollisionChecker() {
     const collisionManager = new CollisionManager(player, bulletArr, () => {
         player.takeDamage();

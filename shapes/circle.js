@@ -63,7 +63,6 @@ class Circle {
             this.circleElm.classList.add("active");
 
             this.circleElm.classList.add("pulse1");
-            console.log(this.bulletAmmount);
 
             setTimeout(() => {
                 if (this.shouldShootBullets) {
