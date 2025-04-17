@@ -91,12 +91,12 @@ class Bullet {
         }
     }
 
-    static wavePattern(startX, startY, bulletSize = 10, bulletSpeed = 5, rows = 5, spacing = 30) {
+    static wavePattern(startX, startY, bulletSize = 10, bulletSpeed = 5, rows = 5, spacing = 30, maxSteps = 900) {
         for (let i = 0; i < rows; i++) {
-            const angle = Math.PI / 2; // Straight up
+            const angle = Math.PI / 2;
             const bulletX = startX + i * spacing;
             const bulletY = startY;
-            const newBullet = new Bullet(bulletX, bulletY, bulletSize, bulletSize, angle, bulletSpeed);
+            const newBullet = new Bullet(bulletX, bulletY, bulletSize, bulletSize, angle, bulletSpeed, maxSteps);
             bulletArr.push(newBullet);
         }
     }
