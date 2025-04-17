@@ -18,7 +18,7 @@
 
 @font-face {
     font-family: "Stepalange";
-    src: url(../assets/stepalange-font/Stepalange-x3BLm.otf) format('opentype');
+    src: url(https://Horrusius/ironhack-thegame-project/assets/stepalange-font/Stepalange-x3BLm.otf) format('opentype');
 }
 
 #index {
@@ -29,7 +29,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    background-image: url(../assets/main_background.jpg);
+    background-image: url(./../assets/main_background.jpg);
     background-repeat: no-repeat;
     background-size: cover;
 }
