@@ -18,7 +18,7 @@
 
 @font-face {
     font-family: "Stepalange";
-    src: url(/assets/stepalange-font/Stepalange-x3BLm.otf)
+    src: url(assets/stepalange-font/Stepalange-x3BLm.otf)
   }
 
 #index {
@@ -29,7 +29,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    background-image: url(/assets/main_background.jpg);
+    background-image: url(assets/main_background.jpg);
     background-repeat: no-repeat;
     background-size: cover;
 }
@@ -42,7 +42,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    background-image: url(/assets/startscreen_background.jpg);
+    background-image: url(assets/startscreen_background.jpg);
     background-repeat: no-repeat;
     background-size: cover;
 }
@@ -108,7 +108,7 @@ img {
     position: relative;
     width: 960px;
     height: 540px;
-    background-image: url(/assets/game_area_background.png);
+    background-image: url(assets/game_area_background.png);
     
     background-blend-mode: overlay;
     background-color: #630202;
