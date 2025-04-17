@@ -18,8 +18,8 @@
 
 @font-face {
     font-family: "Stepalange";
-    src: url(./assets/stepalange-font/Stepalange-x3BLm.otf) format('oft');
-  }
+    src: url(./assets/stepalange-font/Stepalange-x3BLm.otf) format('opentype');
+}
 
 #index {
     margin: 0;
