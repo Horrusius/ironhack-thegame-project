@@ -58,7 +58,7 @@ class Bar {
                 this.barElm.classList.remove("pulse1");
 
                 if (callback) callback();
-            }, this.pulse);
+            }, this.pulseTime);
             setTimeout(() => {
                 this.barElm.remove();
                 const index = barArr.indexOf(this);

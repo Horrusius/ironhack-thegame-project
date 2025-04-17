@@ -7,7 +7,7 @@
 }
 
 :root {
-    --main-background-color: rgb(12, 81, 121);
+    --main-background-color: rgb(4, 202, 169);
     --game-field: rgb(12, 28, 36);
     --player-color: rgb(77, 117, 228);
     --projectile-color: #e11;
@@ -15,6 +15,11 @@
     --game-over-text: #fff;
     --game-over-border: rgb(29, 29, 29);
 }
+
+@font-face {
+    font-family: "Stepalange";
+    src: url(/assets/stepalange-font/Stepalange-x3BLm.otf)
+  }
 
 #index {
     margin: 0;
@@ -24,46 +29,75 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: var(--main-background-color);
+    background-image: url(/assets/main_background.jpg);
 }
 
-#start-screen{
+#start-screen {
     margin: 0;
     padding: 0;
     width: 100vw;
     height: 100vh;
     display: flex;
+    justify-content: center;
+    align-items: center;
+    background-image: url(/assets/startscreen_background.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+#menu {
+    margin: 0;
+    padding: 0;
+    width: 1080px;
+    height: 640px;
+    display: flex;
+    border: rgb(238, 17, 54) inset 10px;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     background-color: var(--main-background-color);
 }
 
-#start{
+h1, h2, p {
+    font-family: "Stepalange";
+    color: white;
+}
+
+h1 {
+    font-size: 60px;
+    margin:50px;
+    align-self: center;
+    
+}
+#instructions {
+    font-size: 27px;
+    width: 380px;
+    margin-left: 50px;
+    display: block;
+}
+
+p {
+    font-size: 21px;
+    width: 600px;
+}
+
+img {
+    width: 600px;
+}
+
+#start {
     font-size: 70px;
     color: var(--game-over-text);
 }
 
-#play-btn{
+#play-btn {
     font-size: 40px;
     text-decoration: none;
-    padding: 30px;
-    background-color: #e11;
+    padding: 20px;
+    background-color: rgb(238, 17, 54);
     color: var(--game-over-text);
     border: solid var(--game-over-border) 3px;
-    border-radius: 40px;
-}
-
-#game-over-screen {
-    margin: 0;
-    padding: 0;
-    width: 100vw;
-    height: 100vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    background-color: var(--main-background-color);
+    border-radius: 20px;
 }
 
 #game-area {
@@ -72,35 +106,64 @@
     position: relative;
     width: 960px;
     height: 540px;
-    background-color: var(--game-field);
+    background-image: url(/assets/game_area_background.png);
+    
+    background-blend-mode: overlay;
+    background-color: #630202;
+    background-size: 50% 50%;
+    background-repeat: repeat;
+    background-position: center;
+    animation: backgroundFlameFlicker 300s 5s infinite alternate;
     overflow: hidden;
+}
+@keyframes backgroundFlameFlicker {
+    0% {
+        background-position: center 0px;
+    }
+    100% {
+        background-position: center -9000px;
+    }
+}
+#game-area::after {
+    content: "";
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: radial-gradient(circle, rgb(255, 102, 0) 0%, transparent 60%);
+    pointer-events: none;
+    animation: glowPulse 4s infinite alternate;
+}
+
+@keyframes glowPulse {
+    0% { opacity: 0.1; }
+    100% { opacity: 0.2; }
 }
 
 #player {
     position: absolute;
-    background-color: var(--player-color);
-    z-index: 999;
+    background-repeat: no-repeat;
+    background-size: 512px 256px;
+    image-rendering: pixelated;
 }
 
 .cubeRain {
     position: absolute;
-    background-color: rgb(255, 255, 255);
-    border-radius: 50%;
-    animation: changeShape .5 2.5s  forwards;
-  }
+    background: radial-gradient(circle, #ff9900 0%, #ff3300 40%, #990000 80%);
+    box-shadow: 0 0 20px 8px #ff4500, 0 0 40px 12px #ff0000;
+    pointer-events: none;
+    border-radius: 8px;
+    animation: flameFall 0.6s infinite alternate;
+}
 
-  @keyframes changeShape {
+@keyframes flameFall {
     0% {
-        background-color: rgb(255, 255, 255);
-        border-radius: 50%;
-        transform: scale(1);
+        transform: scale(1) rotate(0deg);
+        opacity: 1;
     }
-    50% {
-        background-color: rgb(255, 0, 106);
-        border-radius: 0%;
-        transform: scale(1);
+    100% {
+        transform: scale(1.2) rotate(5deg);
+        opacity: 0.8;
     }
-  }
+}
 
 
 #game-over {
@@ -134,23 +197,83 @@
 }
 
 .roll {
-    filter: brightness(0.5) saturate(0.3);
-    transition: filter 0.1s;
+    animation: rollAnim 0.3s ease-in-out;
+}
+
+@keyframes rollAnim {
+    0% {
+        transform: scale(1, 1);
+    }
+    50% {
+        transform: scale(1.3, 0.7);
+    }
+    100% {
+        transform: scale(1, 1);
+    }
 }
 
 .bar {
     position: absolute;
-    background-color: var(--bar-color);
-    transition: width 1s ease, height 1s ease, left 1s ease, bottom 1s ease;
-    z-index: 1;
+    background: linear-gradient(45deg, #ff6600, #ff3300);
+    box-shadow: 0 0 20px rgba(255, 100, 0, 0.7);
+    border-radius: 8px;
+    transition: all 0.3s ease;
+    opacity: 0.9;
+}
+
+/* When the bar is active */
+.bar.active {
+    animation: fireFlicker 0.3s infinite alternate;
+}
+
+/* A quick pulse when activated */
+.bar.pulse1 {
+    animation: pulseGlow 0.8s ease-in-out infinite alternate;
+}
+
+/* Flickering fire effect */
+@keyframes fireFlicker {
+    0% {
+        transform: translate(0px, 0px) scale(1);
+        box-shadow: 0 0 10px rgba(255, 140, 0, 0.6), 0 0 20px rgba(255, 70, 0, 0.8);
+    }
+    100% {
+        transform: translate(1px, -1px) scale(1.02);
+        box-shadow: 0 0 20px rgba(255, 170, 0, 0.8), 0 0 30px rgba(255, 90, 0, 1);
+    }
+}
+
+/* Strong pulsing glow */
+@keyframes pulseGlow {
+    0% {
+        box-shadow: 0 0 15px rgba(255, 120, 0, 0.6), 0 0 30px rgba(255, 80, 0, 0.8);
+    }
+    100% {
+        box-shadow: 0 0 30px rgba(255, 150, 0, 0.9), 0 0 50px rgba(255, 100, 0, 1);
+    }
 }
 
 .circle {
     position: absolute;
-    border: dashed rgb(255, 0, 106);
-    background-color: var(--bar-color);
+    border: dashed #ff3300;
+    background-color: radial-gradient(circle at center, #ff6600 0%, #ff0000 50%, transparent 70%);
     border-radius: 50%;
+    box-shadow: 0 0 20px 8px #ff6600, 0 0 40px 12px #ff0000;
     transition: width 1s ease, height 1s ease, left 1s ease, bottom 1s ease;
+    animation: circleFlameIdle 1s infinite alternate;
+}
+
+@keyframes circleFlameIdle {
+    0% {
+        transform: scale(1) rotate(0deg);
+        opacity: 0.9;
+        box-shadow: 0 0 20px 8px #ff6600, 0 0 40px 12px #ff3300;
+    }
+    100% {
+        transform: scale(1.05) rotate(5deg);
+        opacity: 1;
+        box-shadow: 0 0 30px 12px #ff3300, 0 0 60px 20px #ff0000;
+    }
 }
 
 .shockwave {
@@ -185,16 +308,71 @@
     pointer-events: none;
 }
 
+.bullet.fireball {
+    background: radial-gradient(circle at center, #ff6600 0%, #ff0000 50%, transparent 70%);
+    border-radius: 50%;
+    box-shadow: 0 0 10px 5px #ff6600, 0 0 20px 10px #ff0000;
+    animation: flicker 0.2s infinite alternate;
+}
+
+@keyframes flicker {
+    0% { transform: scale(1) rotate(0deg); opacity: 1; }
+    100% { transform: scale(1.1) rotate(5deg); opacity: 0.9; }
+}
+
 .bullet.spawn {
-    background-color: rgb(255, 255, 255);
+    transform: scale(0);
+    animation: popIn 0.1s forwards;
+}
+
+@keyframes popIn {
+    to { transform: scale(1); }
 }
 
 .active {
     position: absolute;
-    background-color: rgb(255, 0, 106);
+    background: radial-gradient(circle, #ff6600 0%, #ff0000 40%, #990000 80%);
     transition: width 1s ease, height 1s ease, left 1s ease, bottom 1s ease;
-  }
+}
 
 .pulse1 {
     background-color: rgb(255, 255, 255);
+}
+
+#lives {
+    padding: 10;
+    color: white;
+}
+
+.particle {
+    position: absolute;
+    width: 6px;
+    height: 6px;
+    background: #aaa; /* light gray */
+    border-radius: 50%;
+    opacity: 1;
+    pointer-events: none;
+    z-index: 5;
+    transform: rotate(0deg);
+    animation: particleExplode 0.6s ease-out forwards, particleSpin 0.6s linear forwards;
+}
+
+@keyframes particleExplode {
+    0% {
+        transform: translate(0, 0) scale(1) rotate(0deg);
+        opacity: 1;
+    }
+    100% {
+        transform: translate(var(--dx), var(--dy)) scale(0.5) rotate(0deg);
+        opacity: 0;
+    }
+}
+
+@keyframes particleSpin {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(var(--spin)) translate(var(--dx), var(--dy));
+    }
 }

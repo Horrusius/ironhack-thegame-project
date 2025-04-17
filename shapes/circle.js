@@ -94,7 +94,7 @@ class Circle {
 
         setTimeout(() => {
             shockwave.remove();
-        }, 600);
+        }, 500);
     }
 }
 

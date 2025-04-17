@@ -48,21 +48,6 @@ class CollisionManager {
     return false;
   }
 
-  // isCircleCollidingWithCircle(player, circle) {
-  //   const distX = player.positionX - circle.positionX;
-  //   const distY = player.positionY - circle.positionY;
-  //   const distance = Math.sqrt(distX * distX + distY * distY);
-
-  //   const combinedRadii = player.radius + circle.radius; // ??
-
-
-  //   if (distance < combinedRadii) {
-  //     this.applyCollisionEffects();
-  //     return true;
-  //   }
-  //   return false;
-  // }
-
   applyCollisionEffects() {
     if (!this.player.isInvincible) {
       this.player.takeDamage();

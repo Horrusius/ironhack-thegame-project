@@ -15,7 +15,7 @@ class Bullet {
         this.dy = Math.sin(this.angle) * this.speed;
 
         this.bulletElm = document.createElement("div");
-        this.bulletElm.className = "bullet spawn";
+        this.bulletElm.className = "bullet fireball spawn";
 
         setTimeout(() => {
             this.bulletElm.classList.remove("spawn");
