@@ -22,7 +22,6 @@ class Player {
 
         this.pressedKeys = {};
 
-        // --- SLIME ANIMATION SETUP ---
         this.frameWidth = 64;  
         this.frameHeight = 64;
         this.frameCount = 6;   
@@ -50,27 +49,25 @@ class Player {
     }
     fallAndLand() {
         this.element.style.transition = "transform 2s ease-in, bottom 2s ease-in";
-        this.element.style.bottom = "500px"; // Start way above
+        this.element.style.bottom = "500px";
         this.element.style.transform = "rotate(0deg)";
     
-        // Force a reflow (needed to restart CSS transitions)
         void this.element.offsetWidth;
     
         setTimeout(() => {
-            this.element.style.bottom = "240px"; // Target landing position
-            this.element.style.transform = "rotate(720deg)"; // Spin while falling
-        }, 100); // Tiny delay to trigger animation
+            this.element.style.bottom = "240px";
+            this.element.style.transform = "rotate(720deg)";
+        }, 100);
     
         // After falling is complete
         setTimeout(() => {
-            this.element.style.transition = ""; // Clear transition
-            this.element.style.transform = "rotate(0deg)"; // Reset rotation
+            this.element.style.transition = "";
+            this.element.style.transform = "rotate(0deg)";
     
             createParticleExplosion(this.positionX + this.width / 2, this.positionY, 10);
     
-            // Optionally allow movement only after landing:
             this.allowMovement = true;
-        }, 2000); // Match fall duration
+        }, 2000);
     }
 
     initControls() {

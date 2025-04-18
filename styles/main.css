@@ -222,17 +222,14 @@ img {
     opacity: 0.9;
 }
 
-/* When the bar is active */
 .bar.active {
     animation: fireFlicker 0.3s infinite alternate;
 }
 
-/* A quick pulse when activated */
 .bar.pulse1 {
     animation: pulseGlow 0.8s ease-in-out infinite alternate;
 }
 
-/* Flickering fire effect */
 @keyframes fireFlicker {
     0% {
         transform: translate(0px, 0px) scale(1);
@@ -244,7 +241,6 @@ img {
     }
 }
 
-/* Strong pulsing glow */
 @keyframes pulseGlow {
     0% {
         box-shadow: 0 0 15px rgba(255, 120, 0, 0.6), 0 0 30px rgba(255, 80, 0, 0.8);
@@ -349,7 +345,7 @@ img {
     position: absolute;
     width: 6px;
     height: 6px;
-    background: #aaa; /* light gray */
+    background: #aaa;
     border-radius: 50%;
     opacity: 1;
     pointer-events: none;
